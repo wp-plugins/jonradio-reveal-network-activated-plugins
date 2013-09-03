@@ -3,11 +3,17 @@
 //	Exit if .php file accessed directly
 if ( !defined( 'ABSPATH' ) ) exit;
 
-if ( !is_network_admin() ) {
+if ( is_network_admin() ) {
+	require_once( jr_rnap_path() . 'includes/net-settings.php' );
+} else {
 	/*	This code assumes that it is being included on an init action hook.
 		Note that it will fail if run earlier. 
 	*/
-	if ( current_user_can( 'activate_plugins' ) ) {
+	$settings = get_site_option( 'jr_rnap_network_settings' );
+	/*	User can be either a SuperAdmin or the Settings allow a regular Admin,
+		but no matter what, the user must have 'activate_plugins' Capability.
+	*/
+	if ( ( is_super_admin() || ( 'super' !== $settings['super_only'] ) ) && current_user_can( 'activate_plugins' ) ) {
 		/*	Priority for both Actions set to 1 to allow other plugins to set links
 			and add their own entries, after, effectively giving other plugins
 			"the final say", so as to reduce the likelihood of conflict.

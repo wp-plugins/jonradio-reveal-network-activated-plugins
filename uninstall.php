@@ -3,7 +3,9 @@
 if ( !defined( 'WP_UNINSTALL_PLUGIN' ) )
 	exit ();
 
-/*	Nothing to delete.
+/*	Delete Settings.
 */
+delete_site_option( 'jr_rnap_network_settings' );
+delete_site_option( 'jr_rnap_internal_settings' );
 
 ?>

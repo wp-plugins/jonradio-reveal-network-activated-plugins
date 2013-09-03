@@ -2,8 +2,8 @@
 /*
 Plugin Name: jonradio Reveal Network Activated Plugins
 Plugin URI: http://jonradio.com/plugins/jonradio-reveal-network-activated-plugins/
-Description: Displays Network-Activated plugins on Installed Plugins Admin page for individual sites of a WordPress Network.
-Version: 1.0
+Description: Displays Network-Activated plugins on the Installed Plugins Admin panel for individual sites of a WordPress Network.
+Version: 1.1
 Author: jonradio
 Author URI: http://jonradio.com/plugins
 License: GPLv2
@@ -74,7 +74,51 @@ if ( is_admin() ) {
 					require_once( ABSPATH . 'wp-admin/includes/plugin.php' );
 				}
 				$jr_rnap_plugin_data = get_plugin_data( __FILE__ );
+				$jr_rnap_plugin_data['slug'] = basename( dirname( __FILE__ ) );
 				
+				/*	Detect initial activation or a change in plugin's Version number
+			
+					Sometimes special processing is required when the plugin is updated to a new version of the plugin.
+					Also used in place of standard activation and new site creation exits provided by WordPress.
+					Once that is complete, update the Version number in the plugin's Network-wide settings.
+				*/
+			
+				if ( ( FALSE === ( $internal_settings = get_site_option( 'jr_rnap_internal_settings' ) ) ) 
+					|| empty( $internal_settings['version'] ) )
+					{
+					/*	Plugin is either:
+						- updated from a version so old that Version was not yet stored in the plugin's settings, or
+						- first use after install:
+							- first time ever installed, or
+							- installed previously and properly uninstalled (data deleted)
+					*/
+			
+					$old_version = '1';
+				} else {
+					$old_version = $internal_settings['version'];
+				}
+				
+				$settings = get_site_option( 'jr_rnap_network_settings' );
+				if ( empty( $settings ) ) {
+					$settings = array(
+						'super_only' => ''
+					);
+					/*	Add if Settings don't exist, re-initialize if they were empty.
+					*/
+					update_site_option( 'jr_rnap_network_settings', $settings );
+					/*	New install on this site, very old version or corrupt settings
+					*/
+				}
+				
+				if ( version_compare( $old_version, $jr_rnap_plugin_data['Version'], '!=' ) ) {
+					/*	Create, if internal settings do not exist; update if they do exist
+					*/
+					$internal_settings['version'] = $jr_rnap_plugin_data['Version'];
+					update_site_option( 'jr_rnap_internal_settings', $internal_settings );
+					/*	Handle all Settings changes made in old plugin versions
+						(none yet)
+					*/
+				}
 			
 				if ( is_multisite() ) {
 					require_once( jr_rnap_path() . 'includes/multi-site.php' );
