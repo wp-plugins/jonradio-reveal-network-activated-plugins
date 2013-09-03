@@ -20,7 +20,9 @@ A warning Notice is displayed if this plugin is activated on a WordPress install
 
 Every effort has been made to not interfere with plugins that create or modify their own entry on the **Installed Plugins** Admin panel.
 
-Security:  Network Activated plugins are displayed on individual Sites in a WordPress Network:
+**Security**
+
+Network Activated plugins are displayed on individual Sites in a WordPress Network:
 
 1. When this Plugin is Network Activated, or
 1. When this Plugin is Activated on the individual Site, or
