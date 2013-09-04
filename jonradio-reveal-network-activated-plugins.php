@@ -3,7 +3,7 @@
 Plugin Name: jonradio Reveal Network Activated Plugins
 Plugin URI: http://jonradio.com/plugins/jonradio-reveal-network-activated-plugins/
 Description: Displays Network-Activated plugins on the Installed Plugins Admin panel for individual sites of a WordPress Network.
-Version: 1.1
+Version: 1.2
 Author: jonradio
 Author URI: http://jonradio.com/plugins
 License: GPLv2

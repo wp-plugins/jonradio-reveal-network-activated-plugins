@@ -126,6 +126,9 @@ function jr_rnap_network_settings_page() {
 	</i>
 	</p>
 	<p><input name="save" type="submit" value="Save Changes" class="button-primary" /></p></form>
+	<?php
+	require_once( jr_rnap_path() . 'includes/nwpov.php' );
+	?>
 	<hr />
 	<p>
 	If you would like to see this Settings page on each individual Site's Admin Panels within the WordPress Network ("Multi-site")
@@ -156,6 +159,12 @@ function jr_rnap_network_settings_page() {
 	echo '<li> &raquo; MySQL Version ' . $wpdb->get_var( 'SELECT VERSION();', 0, 0 ) . '</li>';
 
 	echo '</ul></p>';
+	?>
+	<h3>Credits</h3>
+	<p>
+	"What is Activated Where?" is based on Version 1.0 of the Network Plugin Overview plugin by davidsword.
+	</p>
+	<?php
 }
 
 function jr_rnap_echo_super_only() {

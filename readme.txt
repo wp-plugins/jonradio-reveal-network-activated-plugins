@@ -4,7 +4,7 @@ Donate link: http://jonradio.com/plugins
 Tags: network, activation, activate, plugins, multisite
 Requires at least: 3.1
 Tested up to: 3.6
-Stable tag: 1.1
+Stable tag: 1.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -12,7 +12,7 @@ Displays Network-Activated plugins on the Installed Plugins Admin panel for indi
 
 == Description ==
 
-As the name implies, the *jonradio Reveal Network Activated Plugins* plugin displays the Plugins that WordPress would normally hide:  WordPress only displays Network Activated plugins on the **Installed Plugins** Network Admin panel.  *jonradio Reveal Network Activated Plugins* also displays Network Activated plugins on each site's **Installed Plugins** Admin panel, with *Network Activated* displayed below the plugin name where *Activate* or *Deactivate* is displayed for other plugins.
+As the name implies, the *jonradio Reveal Network Activated Plugins* plugin displays the Plugins that WordPress would normally hide:  WordPress only displays Network Activated plugins on the **Installed Plugins** Network Admin panel.  *jonradio Reveal Network Activated Plugins* also displays Network Activated plugins on each site's **Installed Plugins** Admin panel, with *Network Activated* displayed below the plugin name where *Activate* or *Deactivate* is displayed for other plugins. In addition, the plugin's Network Admin panel, available only to Super Administrators, shows which plugins are activated on which Sites within the WordPress Network.
 
 In a WordPress Network, i.e. - a single WordPress installation that provides multiple sites ("Multi-site"), Plugins can be activated on individual sites or they can be **Network Activated**, which means they are activated on all sites.  Confusion can result because WordPress does not display these Network Activated plugins on each site's **Installed Plugins** Admin panel, a confusion that this plugin hopes to eliminate.
 
@@ -58,14 +58,20 @@ To change this behaviour, select the "Enable administration menus - Plugins" che
 
 == Changelog ==
 
+= 1.2 =
+* Expand plugin's Network Admin panel to show where (which sites) each plugin is Activated.
+
 = 1.1 =
-* Add Network Settings page with network-wide option to only allow Super Admins to view Network-Activated Plugins, or not.
+* Add Network Admin panel with network-wide option to only allow Super Admins to view Network-Activated Plugins, or not.
 
 = 1.0 =
 * Make plugin conform to WordPress plugin repository standards.
 * Fix "You do not have sufficient permissions to manage plugins for this site." when trying to login
 
 == Upgrade Notice ==
+
+= 1.2 =
+Indicate Sites where each plugin is Activated.
 
 = 1.1 =
 Control whether Site Admins can see Network-Activated Plugins
