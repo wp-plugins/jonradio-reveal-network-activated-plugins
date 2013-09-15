@@ -51,18 +51,6 @@ function jr_rnap_network_settings_page() {
 		}
 		update_site_option( 'jr_rnap_network_settings', jr_rnap_validate_network_settings( $post ) );
 		
-		if ( isset( $_POST['menu_items'] ) ) {
-			$post = jr_rnap_validate_menu_items( $_POST['menu_items'] );
-		} else {
-			$post = array();
-		}
-		if ( FALSE === $other_menu_items = get_site_option( 'menu_items' ) ) {
-			$other_menu_items = array();
-		} else {
-			unset( $other_menu_items['plugins'] );
-		}
-		update_site_option( 'menu_items', array_merge( $other_menu_items, $post ) );
-		
 		add_settings_error(
 			'jr_rnap_network_settings',
 			'jr_rnap_saved',
@@ -77,20 +65,55 @@ function jr_rnap_network_settings_page() {
 	?>
 	<h3>Overview</h3>
 	<p>
-	WordPress does not show Network-Activated plugins on Admin panels of individual sites of a WordPress Network (Multisite).
-	Activating this plugin 
+	Unlike WordPress,
+	this plugin 
 	(<i>jonradio Reveal Network Activated Plugins</i>) 
-	displays those Network-Activated plugins.
-	</p>
-	<h3>Who Sees Them?</h3>
-	Activating this plugin will always reveal Network-Activated plugins to Super Administrators,
-	i.e. - those authorized to manage the Network, including the viewing of this and all other Network Admin pages.
+	can show Network-Activated plugins on Admin panels of <b>individual sites</b> of a WordPress Network (Multisite).
+	As well as Must-Use plugins and Drop-ins.
+	The Settings below
+	control which of these are displayed, and to whom.
 	</p>
 	<p>
-	The two Settings below, 
-	and the "activate_plugins" Capability, 
-	determine who else besides the Super Administrators can
-	see Network-Activated plugins.
+	Below the Settings is a display of which plugins are activated on what sites,
+	information not currently provided by WordPress on its Admin panels.
+	</p>
+	
+	<h3>Who Sees Them?</h3>
+	<p>
+	...on individual sites of a WordPress Network (Multisite).
+	</p>
+	<form method="POST">
+	<input type="hidden" name="action" value="save" />
+	<?php
+	wp_nonce_field( 'save_network_settings', 'jonradio-reveal-network-activated-plugins' );
+	jr_rnap_echo_permissions_table();
+	?>
+
+	<p>
+	*<b>Plugins</b> - 
+	this is the same setting shown at the bottom of the Network Settings Admin panel, where it is labeled "Enable administration menus - Plugins".
+	Whichever place you choose to control this setting,
+	it also enables and disables the "activate_plugins" Capability for all Administrators who are not Super Administrators.
+	In addition,
+	selecting Super Administrators Only for Plugins
+	does not allow Site Administrators (or anyone else with the "activate_plugins" Capability)
+	to even see the Plugins Admin panel menu options on individual sites,
+	let alone view Must-Use plugins and Drop-ins.
+	</p>
+	<p>
+	**<b>Site Administrators</b> -
+	selecting Site Administrators also permits viewing by any other User with the "activate_plugins" Capability.
+	By default, only Administrators have the "activate_plugins" Capability.
+	</p>
+	<p>
+	To clarify, 
+	a Super Adminstrator has access to all Network Admin panels,
+	and all Admin panels on all Sites within the Network (Multisite WordPress installation).
+	On the other hand,
+	a Site Administrator does not have access to the Network Admin panels
+	but has the Role of Administrator,
+	and access to Admin panels,
+	for one or more Sites within the Network.
 	</p>
 	<p>
 	In WordPress, Roles and Capabilities for a User can vary from site to site within a Network (Multisite).
@@ -104,26 +127,13 @@ function jr_rnap_network_settings_page() {
 	The "activate_plugins" Capability,
 	however,
 	cannot be removed from a User with the Role of Administrator.
-	It can, however, be disabled as described in the Settings below.
+	It can, however, be disabled as described above.
 	</p>
-	<form method="POST">
-	<input type="hidden" name="action" value="save" />
-	<?php
-	wp_nonce_field( 'save_network_settings', 'jonradio-reveal-network-activated-plugins' );
-	jr_rnap_echo_super_only();
-	?>
-	Only Super Administrators can see Network-Activated Plugins on Installed Plugins Admin panel of individual sites
 	<p>
-	<?php
-	jr_rnap_echo_plugin_menu();
-	?>
-	Display Plugin menu items on individual site Admin panels, even if not Super Admin
-	<br />
-	<i>
-	This is the same setting shown at the bottom of the Network Settings Admin panel and labelled as "Enable administration menus - Plugins".
-	Whichever place you choose to control this setting,
-	it also enables and disables the "activate_plugins" Capability for all Administrators who are not Super Administrators.
-	</i>
+	<b>Must-Use</b> plugins and <b>Drop-ins</b> are not used as often as regular Plugins,
+	and are not activated or deactivated through the WordPress Admin panels.
+	<a href="http://codex.wordpress.org/Must_Use_Plugins">Click here</a> for more information on Must-Use plugins from the WordPress Codex.
+	<a href="http://hakre.wordpress.com/2010/05/01/must-use-and-drop-ins-plugins/">Click here</a> for more information on both from Hakre.
 	</p>
 	<p><input name="save" type="submit" value="Save Changes" class="button-primary" /></p></form>
 	<?php
@@ -137,7 +147,14 @@ function jr_rnap_network_settings_page() {
 	and this will be added to a future version of this plugin if there is enough interest expressed by webmasters such as you.
 	</p>
 	<?php
-	echo '<h3>System Information</h3><p>You are currently running:<ul>';
+	echo '<h3>System Information</h3>';
+	echo '<p>There are ' . count( get_mu_plugins() ) . ' Must-Use plugins installed.';
+	echo '<ul><li> &raquo; The Must-Use plugins Path is ' . WPMU_PLUGIN_DIR . '</li>';
+	echo '<li> &raquo; The Must-Use plugins URL is ' . WPMU_PLUGIN_URL . '</li></ul></p>';
+	echo '<p>There are ' . count( get_dropins() ) . ' Drop-ins installed.';
+	echo '<ul><li> &raquo; The Drop-ins Path is ' . WP_CONTENT_DIR . '</li>';
+	echo '<li> &raquo; The Drop-ins URL is ' . WP_CONTENT_URL . '</li></ul></p>';
+	echo '<p>You are currently running:<ul>';
 	echo "<li> &raquo; The {$jr_rnap_plugin_data['Name']} plugin Version {$jr_rnap_plugin_data['Version']}</li>";
 	echo '<li> &nbsp; &raquo;&raquo; This Plugin has been <b>Network Activated</b> in a WordPress Multisite ("Network") installation';
 	echo "<li> &nbsp; &raquo;&raquo; The Path to the plugin's directory is " . rtrim( jr_rnap_path(), '/' ) . '</li>';
@@ -167,65 +184,97 @@ function jr_rnap_network_settings_page() {
 	<?php
 }
 
-function jr_rnap_echo_super_only() {
+function jr_rnap_echo_permissions_table() {
+	$columns = array(
+		'noone' => 'No One', 
+		'super'  => 'Super Administrators Only',  
+		'siteadmin' => 'Site Administrators**'
+	);
+	function jr_rnap_permissions_heads( $where, $columns ) {
+		$output = "<t$where><tr><th>What?</th>";
+		foreach ( $columns as $who => $who_description ) {
+			$output .= '<th width="30%" style="text-align: center">' . "$who_description</th>";
+		}
+		return $output . "</tr></t$where>";
+	}
+	echo '<table class="widefat">'
+		. jr_rnap_permissions_heads( 'head', $columns )
+		. jr_rnap_permissions_heads( 'foot', $columns )
+		. '<tbody>';
 	$settings = get_site_option( 'jr_rnap_network_settings' );
-	echo '<input type="checkbox" id="super_only" name="jr_rnap_network_settings[super_only]" value="super" ';
-	if ( 'super' === $settings['super_only'] ) {
-		echo 'checked="checked"';
+	$menu_items = get_site_option( 'menu_items' );
+	if ( isset( $menu_items['plugins'] ) && ( '1' === $menu_items['plugins'] ) ) {
+		$settings['plugins'] = 'siteadmin';
+	} else {
+		$settings['plugins'] = 'super';
 	}
-	echo ' />';
-}
-
-function jr_rnap_echo_plugin_menu() {
-	$settings = get_site_option( 'menu_items' );
-	echo '<input type="checkbox" name="menu_items[plugins]" value="1" ';
-	if ( isset( $settings['plugins'] ) && ( '1' === $settings['plugins'] ) ) {
-		echo 'checked="checked"';
-	}
-	echo ' />';
-	/*	get_site_option( 'menu_items' ) assumes the following values in WordPress 3.6:
-			Checkbox referred to below is labelled "Enable administration menus - Plugins"
-			and is found at the bottom of /wp-admin/network/settings.php
-		When first installed (checkbox shows as not checked):  FALSE
-		When checked:  array( 'plugins' => '1' )
-		When not checked:  array()
-	
-		Original code in WordPress core 3.6:
-		<h3><?php _e( 'Menu Settings' ); ?></h3>
-		<table id="menu" class="form-table">
-			<tr valign="top">
-				<th scope="row"><?php _e( 'Enable administration menus' ); ?></th>
-				<td>
-			<?php
-			$menu_perms = get_site_option( 'menu_items' );
-			$menu_items = apply_filters( 'mu_menu_items', array( 'plugins' => __( 'Plugins' ) ) );
-			foreach ( (array) $menu_items as $key => $val ) {
-				echo "<label><input type='checkbox' name='menu_items[" . $key . "]' value='1'" . ( isset( $menu_perms[$key] ) ? checked( $menu_perms[$key], '1', false ) : '' ) . " /> " . esc_html( $val ) . "</label><br/>";
+	foreach ( array(
+		'plugins' => 'Plugins*', 
+		'netact'  => 'Network-Activated', 
+		'mustuse' => 'Must-Use', 
+		'dropins' => 'Drop-ins'
+			) as $what => $what_description )
+	{
+		echo "<tr><td><b>$what_description</b></td>";
+		foreach ( $columns as $who => $who_description ) {
+			echo '<td style="text-align: center; vertical-align: middle">';
+			if ( ( 'plugins' === $what ) && ( 'noone' === $who ) ) {
+				echo '&#151;';
+			} else {
+				echo '<input type="radio" ';
+				if ( $who === $settings[ $what ] ) {
+					echo 'checked="checked"';
+				}
+				echo ' id="' . $what . '" name="jr_rnap_network_settings[' . $what 
+					. ']" value="' . $who . '" />';
 			}
-			?>
-				</td>
-			</tr>
-		</table>
-	*/
+			echo '</td>';
+		}
+		echo '</tr>';
+	}
+	echo '</tbody></table>';
 }
 
 function jr_rnap_validate_network_settings( $input ) {
-	$valid = array();
-	if ( isset ( $input['super_only'] ) ) {
-		$valid['super_only'] = 'super';
+	$valid = $input;
+	unset( $valid['plugins'] );
+	if ( FALSE === $menu_items = get_site_option( 'menu_items' ) ) {
+		$other_menu_items = array();
+	}
+	if ( 'siteadmin' === $input['plugins'] ) {
+		$menu_items['plugins'] = '1';
 	} else {
-		$valid['super_only'] = '';
+		if ( 'super' === $input['plugins'] ) {
+			unset( $menu_items['plugins'] );
+		}
 	}
+	update_site_option( 'menu_items', $menu_items );
 	return $valid;
 }
+/*	get_site_option( 'menu_items' ) assumes the following values in WordPress 3.6:
+		Checkbox referred to below is labelled "Enable administration menus - Plugins"
+		and is found at the bottom of /wp-admin/network/settings.php
+	When first installed (checkbox shows as not checked):  FALSE
+	When checked:  array( 'plugins' => '1' )
+	When not checked:  array()
 
-function jr_rnap_validate_menu_items( $input ) {
-	$valid = array();
-	if ( isset( $input['plugins'] ) && ( '1' === $input['plugins'] ) ) {
-		$valid['plugins'] = '1';
-	}
-	return $valid;
-}
+	Original code in WordPress core 3.6:
+	<h3><?php _e( 'Menu Settings' ); ?></h3>
+	<table id="menu" class="form-table">
+		<tr valign="top">
+			<th scope="row"><?php _e( 'Enable administration menus' ); ?></th>
+			<td>
+		<?php
+		$menu_perms = get_site_option( 'menu_items' );
+		$menu_items = apply_filters( 'mu_menu_items', array( 'plugins' => __( 'Plugins' ) ) );
+		foreach ( (array) $menu_items as $key => $val ) {
+			echo "<label><input type='checkbox' name='menu_items[" . $key . "]' value='1'" . ( isset( $menu_perms[$key] ) ? checked( $menu_perms[$key], '1', false ) : '' ) . " /> " . esc_html( $val ) . "</label><br/>";
+		}
+		?>
+			</td>
+		</tr>
+	</table>
+*/
 
 // Add Link to the plugin's entry on the Network Admin "Plugins" Page, for easy access
 add_filter( 'network_admin_plugin_action_links_' . jr_rnap_plugin_basename(), 'jr_rnap_plugin_network_action_links', 10, 1 );

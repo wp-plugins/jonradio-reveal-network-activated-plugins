@@ -1,5 +1,8 @@
 <?php
 
+/*	This file's code is adapted from Version 1.0 of the Network Plugin Overview plugin @ http://davidsword.ca/
+*/
+
 //	Exit if .php file accessed directly
 if ( !defined( 'ABSPATH' ) ) exit;
 
@@ -31,7 +34,7 @@ function jr_rnap_nwpov() {
 		$all_sites[] = $getsite_name->option_value;
 	}
 
-	// get network-wide actived plugins
+	// get network-wide activated plugins
 	$getnetwork_plugins = $wpdb->get_row("SELECT meta_value FROM {$wpdb->prefix}sitemeta WHERE meta_key = 'active_sitewide_plugins'");
 	$network_plugins = array_flip((array)unserialize($getnetwork_plugins->meta_value));		
 	
@@ -80,14 +83,4 @@ function jr_rnap_nwpov() {
 	<?php
 }
 
-//	This file's code is adapted from:
-/*
-Plugin Name: Network Plugin Overview
-Plugin URI: http://davidsword.ca/network-plugin-overview
-Description: View which plugins are being used on which sites in a wordpress network
-Version: 1.0
-Author: davidsword
-Author URI: http://davidsword.ca/
-License: GPL2
-*/
 ?>
