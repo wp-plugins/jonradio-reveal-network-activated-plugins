@@ -4,7 +4,7 @@ Donate link: http://jonradio.com/plugins
 Tags: network, activation, activate, plugins, multisite, must-use, drop-ins
 Requires at least: 3.1
 Tested up to: 3.6
-Stable tag: 2.0
+Stable tag: 2.0.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -61,6 +61,9 @@ To change this behaviour, select the "Enable administration menus - Plugins" che
 
 == Changelog ==
 
+= 2.0.1 =
+* Refresh old (Version 1.2) Settings with New (Version 2.0)
+
 = 2.0 =
 * Add Must-Use plugins and Drop-ins to the Installed Plugins Admin panel for individual sites of a WordPress Network.
 * Add Settings to control the display of different types of plugins on the Installed Plugins Admin panel for individual sites of a WordPress Network.
@@ -76,6 +79,9 @@ To change this behaviour, select the "Enable administration menus - Plugins" che
 * Fix "You do not have sufficient permissions to manage plugins for this site." when trying to login
 
 == Upgrade Notice ==
+
+= 2.0.1 =
+Fix Errors on Settings page when upgrading from Version 1.2 to 2.0
 
 = 2.0 =
 Display Must-Use plugins and Drop-ins.

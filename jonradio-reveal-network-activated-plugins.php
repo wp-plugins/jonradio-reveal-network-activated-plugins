@@ -3,7 +3,7 @@
 Plugin Name: jonradio Reveal Network Activated Plugins
 Plugin URI: http://jonradio.com/plugins/jonradio-reveal-network-activated-plugins/
 Description: Displays Network-Activated and Must-Use (MU) plugins, and Drop-ins on the Installed Plugins Admin panel for individual sites of a WordPress Network.
-Version: 2.0
+Version: 2.0.1
 Author: jonradio
 Author URI: http://jonradio.com/plugins
 License: GPLv2
@@ -99,7 +99,7 @@ if ( is_admin() ) {
 				}
 				
 				$settings = get_site_option( 'jr_rnap_network_settings' );
-				if ( empty( $settings ) ) {
+				if ( empty( $settings ) || !isset( $settings['netact'] ) ) {
 					$settings = array(
 						'netact'  => 'siteadmin',
 						'mustuse' => 'siteadmin',
