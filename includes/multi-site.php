@@ -5,6 +5,7 @@ if ( !defined( 'ABSPATH' ) ) exit;
 
 if ( is_network_admin() ) {
 	require_once( jr_rnap_path() . 'includes/net-settings.php' );
+	require_once( jr_rnap_path() . 'includes/net-page-mods.php' );
 } else {
 	/*	This code assumes that it is being included on an init action hook.
 		Note that it will fail if run earlier. 

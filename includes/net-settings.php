@@ -1,6 +1,6 @@
 <?php
-/*	Network Settings Page to determine if anyone but SuperAdmin can see
-	Network-Activated Plugins
+/*	Network Settings Page to determine who can see which plugins on individual sites' Installed Plugins page
+	and to display other useful information to Super Administrators.
 */
 
 //	Exit if .php file accessed directly
