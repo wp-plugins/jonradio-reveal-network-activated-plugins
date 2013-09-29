@@ -81,6 +81,7 @@ function jr_rnap_network_settings_page() {
 	<h3>Who Sees Them?</h3>
 	<p>
 	...on individual sites of a WordPress Network (Multisite).
+	To make Exceptions for a specific Plugin, see the <b>Show/Hide Plugins</b> section below.
 	</p>
 	<form method="POST">
 	<input type="hidden" name="action" value="save" />
@@ -135,10 +136,23 @@ function jr_rnap_network_settings_page() {
 	<a href="http://codex.wordpress.org/Must_Use_Plugins">Click here</a> for more information on Must-Use plugins from the WordPress Codex.
 	<a href="http://hakre.wordpress.com/2010/05/01/must-use-and-drop-ins-plugins/">Click here</a> for more information on both from Hakre.
 	</p>
-	<p><input name="save" type="submit" value="Save Changes" class="button-primary" /></p></form>
+	<p><input name="save" type="submit" value="Save Changes" class="button-primary" /></p>
 	<?php
 	require_once( jr_rnap_path() . 'includes/nwpov.php' );
 	?>
+	<h3>Show/Hide Plugins</h3>
+	<p>
+	You can select specific Plugins that you Always or Never want Site Administrators (who are not Super Administrators) to see.
+	This will apply no matter whether or not the Plugin is Network Activated.
+	You can even delete and re-install the Plugin,
+	and this Setting for that specific Plugin will be remembered.
+	However, Settings can only be changed for Plugins that are currently installed.
+	</p>
+	<?php
+	jr_rnap_echo_show_hide_plugins();
+	?>	
+	<p><input name="save" type="submit" value="Save Changes" class="button-primary" /></p>
+	</form>
 	<hr />
 	<p>
 	If you would like to see this Settings page on each individual Site's Admin Panels within the WordPress Network ("Multi-site")
@@ -185,11 +199,10 @@ function jr_rnap_network_settings_page() {
 }
 
 function jr_rnap_echo_permissions_table() {
-	$columns = array(
-		'noone' => 'No One', 
-		'super'  => 'Super Administrators Only',  
-		'siteadmin' => 'Site Administrators**'
-	);
+	global $jr_rnap_settings_names, $jr_rnap_settings_values;
+	$columns = $jr_rnap_settings_values;
+	$rows['plugins'] = 'Plugins*';
+	$rows = array_merge( $rows, $jr_rnap_settings_names );
 	function jr_rnap_permissions_heads( $where, $columns ) {
 		$output = "<t$where><tr><th>What?</th>";
 		foreach ( $columns as $who => $who_description ) {
@@ -208,13 +221,7 @@ function jr_rnap_echo_permissions_table() {
 	} else {
 		$settings['plugins'] = 'super';
 	}
-	foreach ( array(
-		'plugins' => 'Plugins*', 
-		'netact'  => 'Network-Activated', 
-		'mustuse' => 'Must-Use', 
-		'dropins' => 'Drop-ins'
-			) as $what => $what_description )
-	{
+	foreach ( $rows as $what => $what_description ) {
 		echo "<tr><td><b>$what_description</b></td>";
 		foreach ( $columns as $who => $who_description ) {
 			echo '<td style="text-align: center; vertical-align: middle">';
@@ -235,9 +242,51 @@ function jr_rnap_echo_permissions_table() {
 	echo '</tbody></table>';
 }
 
+function jr_rnap_echo_show_hide_plugins() {
+	global $jr_rnap_show_values;
+	$columns = $jr_rnap_show_values;
+	function jr_rnap_show_hide_heads( $where, $columns ) {
+		$output = "<t$where><tr><th>Plugin</th>";
+		foreach ( $columns as $who => $who_description ) {
+			$output .= '<th width="20%" style="text-align: center">' . "$who_description</th>";
+		}
+		return $output . "</tr></t$where>";
+	}
+	echo '<table class="widefat">'
+		. jr_rnap_show_hide_heads( 'head', $columns )
+		. jr_rnap_show_hide_heads( 'foot', $columns )
+		. '<tbody>';
+	$settings = get_site_option( 'jr_rnap_network_settings' );
+	$plugins = get_plugins();
+	/*	Add any Plugins with Show settings that have been deleted,
+		in case they are re-installed.
+	*/
+	foreach ( $settings['show'] as $plugin_file => $show ) {
+		if ( !isset( $plugins[$plugin_file] ) ) {
+			$plugins[$plugin_file]['Name'] = "$plugin_file (uninstalled)";
+		}
+	}
+	foreach ( $plugins as $plugin_file => $plugin_data ) {
+		echo '<tr><td>' . $plugin_data['Name'] . '</td>';
+		if ( isset( $settings['show'][$plugin_file] ) ) {
+			$settings_show = $settings['show'][$plugin_file];
+		} else {
+			$settings_show = '';
+		}
+		foreach ( $columns as $show => $show_description ) {
+			echo '<td style="text-align: center; vertical-align: middle">'
+				. '<input type="radio" '
+				. checked( $settings_show, $show, FALSE )
+				. ' id="' . $plugin_file . '" name="jr_rnap_network_settings[show][' 
+				. $plugin_file . ']" value="' . $show . '" />'
+				. '</td>';
+		}
+		echo '</tr>';
+	}
+	echo '</tbody></table>';
+}
+
 function jr_rnap_validate_network_settings( $input ) {
-	$valid = $input;
-	unset( $valid['plugins'] );
 	if ( FALSE === $menu_items = get_site_option( 'menu_items' ) ) {
 		$other_menu_items = array();
 	}
@@ -249,6 +298,30 @@ function jr_rnap_validate_network_settings( $input ) {
 		}
 	}
 	update_site_option( 'menu_items', $menu_items );
+	
+	global $jr_rnap_settings_names, $jr_rnap_settings_values, $jr_rnap_show_values;
+	foreach ( $jr_rnap_settings_names as $value => $description ) {
+		if ( isset( $jr_rnap_settings_values[$input[$value]] ) ) {
+			$valid[$value] = $input[$value];
+		}
+	}
+	
+	/*	Only allow valid values for ['show'][plugin] elements;
+		delete entry when value is blank.
+	*/
+	if ( isset( $input['show'] ) ) {
+		$settings = get_site_option( 'jr_rnap_network_settings' );
+		foreach ( $input['show'] as $plugin_file => $show ) {
+			if ( '' == trim( $show ) ) {
+				unset( $settings['show'][$plugin_file] );
+			} else {
+				if ( isset( $jr_rnap_show_values[$show] ) ) {
+					$valid['show'][$plugin_file] = $show;
+				}
+			}
+		}
+		update_site_option( 'jr_rnap_network_settings', $settings );
+	}
 	return $valid;
 }
 /*	get_site_option( 'menu_items' ) assumes the following values in WordPress 3.6:

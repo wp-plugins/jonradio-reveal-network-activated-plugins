@@ -50,10 +50,11 @@ if ( is_network_admin() ) {
 			/*	Use Settings as Permissions to determine what gets displayed
 			*/
 			$settings = get_site_option( 'jr_rnap_network_settings' );
+			$plugins_cache = (array) apply_filters( 'all_plugins', get_plugins() );
 			if ( ( 'siteadmin' === $settings['netact'] ) || ( is_super_admin() && ( 'super' === $settings['netact'] ) ) ) {
-				$plugins['all'] = (array) apply_filters( 'all_plugins', get_plugins() );
+				$plugins['all'] = $plugins_cache;
 			} else {
-				foreach ( (array) apply_filters( 'all_plugins', get_plugins() ) as $plugin_file => $plugin_data ) {
+				foreach ( (array) $plugins_cache as $plugin_file => $plugin_data ) {
 					if ( !is_plugin_active_for_network( $plugin_file ) ) {		
 						$plugins['all'][ $plugin_file ] = $plugin_data;
 					}
@@ -68,6 +69,25 @@ if ( is_network_admin() ) {
 				$plugins['di'] = get_dropins();
 			} else {
 				$plugins['di'] = array();
+			}
+			
+			/*	Apply Settings to Hide or Show specific plugins for Site Administrators
+				who are not Super Administrators.
+			*/
+			if ( !is_super_admin() ) {
+				foreach ( $settings['show'] as $plugin_file => $show ) {
+					if ( 'never' === $show ) {
+						/*	If it exists, delete entry
+						*/
+						unset( $plugins['all'][$plugin_file] );
+					} else {
+						if ( ( 'always' === $show ) && isset( $plugins_cache[$plugin_file] ) ) {
+							/*	Add or replace entry
+							*/
+							$plugins['all'][$plugin_file] = $plugins_cache[$plugin_file];
+						}							
+					}
+				}
 			}
 			
 			$plugins['all'] = array_merge( $plugins['all'], $plugins['mu'], $plugins['di'] );

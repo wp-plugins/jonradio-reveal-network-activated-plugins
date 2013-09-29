@@ -3,8 +3,8 @@ Contributors: jonradio
 Donate link: http://jonradio.com/plugins
 Tags: network, activation, activate, plugins, multisite, must-use, drop-ins
 Requires at least: 3.1
-Tested up to: 3.6
-Stable tag: 2.1
+Tested up to: 3.6.1
+Stable tag: 3.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -20,6 +20,8 @@ A warning Notice is displayed if this plugin is activated on a WordPress install
 
 Every effort has been made to not interfere with plugins that create or modify their own entry on the **Installed Plugins** Admin panel.
 
+We are currently investigating reports of conflicts with other plugins that also control the display of plugins by Site Administrators, including Security plugins that always block this access and plugins that enhance function by always displaying plugins.
+
 = Settings =
 
 A Settings page for this plugin is available to Super Administrators on both the Plugins and Settings submenus within the Network Administration panels.  It determines which plugins are visible on the Plugins Admin panel of each site within the Network.
@@ -29,6 +31,8 @@ A "Who Sees Them?" table of choices can be used to set who sees Network-Activate
 The Plugins row of the table actually controls the same Setting as the "Enable administration menus - Plugins" checkbox at the bottom of the Network Settings Admin panel.  It is provided here to avoid the confusion that otherwise exists when Super Administrators cannot figure out why their Site Administrators do not even have a Plugin menu on their Site Admin panels.
 
 Within the "Who Sees Them?" table, the column entitled "Site Administrators" also refers to anyone else with the "activate_plugins" Capability for the Site.
+
+A "Show/Hide Plugins" table of choices can be used to always Display or Hide specific plugins for Site Administrators.  This is especially useful for Super Administrators developing or testing new plugins that are not yet ready for use by Site Administrators.  It can be also used when only a few of the many plugins installed are to be made available to Site Administrators.
 
 = Definitions =
 
@@ -61,6 +65,9 @@ To change this behaviour, select the "Enable administration menus - Plugins" che
 
 == Changelog ==
 
+= 3.0 =
+* Add "Show/Hide Plugins" section to Network Settings page for plugin, to allow specific plugins to be always hidden or always shown to non-Super Admin Site Administrators
+
 = 2.1 =
 * Expand Delete Plugins confirmation panel to show where (which sites) each plugin is Activated
 
@@ -82,6 +89,9 @@ To change this behaviour, select the "Enable administration menus - Plugins" che
 * Fix "You do not have sufficient permissions to manage plugins for this site." when trying to login
 
 == Upgrade Notice ==
+
+= 3.0 =
+Add Settings for Always Hiding and Showing one or more Plugins
 
 = 2.1 =
 Display where plugins are activated on Delete Plugins confirmation panel

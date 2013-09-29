@@ -3,7 +3,7 @@
 Plugin Name: jonradio Reveal Network Activated Plugins
 Plugin URI: http://jonradio.com/plugins/jonradio-reveal-network-activated-plugins/
 Description: Displays Network-Activated and Must-Use (MU) plugins, and Drop-ins on the Installed Plugins Admin panel for individual sites of a WordPress Network.
-Version: 2.1
+Version: 3.0
 Author: jonradio
 Author URI: http://jonradio.com/plugins
 License: GPLv2
@@ -41,6 +41,25 @@ if ( is_admin() ) {
 			if ( version_compare( get_bloginfo( 'version' ), '3.1', '<' ) ) {
 				require_once( plugin_dir_path( __FILE__ ) . 'includes/old-wp.php' );
 			} else {
+				/*	Globals
+				*/
+				global $jr_rnap_settings_names, $jr_rnap_settings_values, $jr_rnap_show_values;
+				$jr_rnap_settings_names = array(
+					'netact'  => 'Network-Activated', 
+					'mustuse' => 'Must-Use', 
+					'dropins' => 'Drop-ins'
+				);
+				$jr_rnap_settings_values = array(
+					'noone' => 'No One', 
+					'super'  => 'Super Administrators Only',  
+					'siteadmin' => 'Site Administrators**'
+				);
+				$jr_rnap_show_values = array(
+					''       => 'Default', 
+					'never'  => 'Never',  
+					'always' => 'Always'
+				);
+				
 				global $jr_rnap_path;
 				$jr_rnap_path = plugin_dir_path( __FILE__ );
 				/**
@@ -101,15 +120,23 @@ if ( is_admin() ) {
 				$settings = get_site_option( 'jr_rnap_network_settings' );
 				if ( empty( $settings ) || !isset( $settings['netact'] ) ) {
 					$settings = array(
-						'netact'  => 'siteadmin',
-						'mustuse' => 'siteadmin',
-						'dropins' => 'siteadmin'
+						'show' => array()
 					);
+					foreach ( $jr_rnap_settings_names as $value => $description ) {
+						$settings[$value] = 'siteadmin';
+					}
 					/*	Add if Settings don't exist, re-initialize if they were empty.
 					*/
 					update_site_option( 'jr_rnap_network_settings', $settings );
 					/*	New install on this site, very old version or corrupt settings
 					*/
+				}
+				
+				/*	This Setting was added later.
+				*/
+				if ( !isset( $settings['show'] ) ) {
+					$settings['show'] = array();
+					update_site_option( 'jr_rnap_network_settings', $settings );
 				}
 				
 				if ( version_compare( $old_version, $jr_rnap_plugin_data['Version'], '!=' ) ) {
