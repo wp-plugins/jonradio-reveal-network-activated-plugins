@@ -6,7 +6,84 @@
 //	Exit if .php file accessed directly
 if ( !defined( 'ABSPATH' ) ) exit;
 
-jr_rnap_nwpov();
+if ( version_compare( get_bloginfo( 'version' ), '3.7', '<' ) ) {
+	jr_rnap_nwpov();
+} else {
+	/*	Uses wp_get_sites(), and works better
+	*/
+	jr_rnap_what_where();
+}
+
+function jr_rnap_what_where() {
+	global $wpdb;
+
+	// get all plugins..
+	// this from wp-admin/includes/class-wp-plugins-list-table.php
+	$plugins = apply_filters( 'all_plugins', get_plugins() );
+	
+	// get all sites, their name, and their plugins, put into array
+	$sites_plugins = array();
+	$all_sites = array();
+	$restore_blog_id = get_current_blog_id();
+	/*	"No Network Too Large"
+		Always return FALSE.
+	*/
+	add_filter( 'wp_is_large_network', '__return_false' );	
+	foreach ( wp_get_sites() as $k => $site ) {
+		switch_to_blog( $site['blog_id'] );
+		$all_sites[ $site['blog_id'] ] = get_bloginfo( 'name' );
+		foreach ( $plugins as $path => $array ) {
+			if ( is_plugin_active( $path ) ) {
+				$sites_plugins[ $site['blog_id'] ][ $path ] = TRUE;
+			}
+		}
+	}
+	switch_to_blog( $restore_blog_id );
+
+	?>
+	<h3>What is Activated Where?</h3>
+	<style>
+		#nwpov_table tr:nth-child(odd) { background: #efefef; }
+		#nwpov_table td { padding: 5px; text-shadow: 1px 1px rgba(255,255,255,0.6) }
+	</style>
+	<table cellpadding=2 cellspacing="2" id='nwpov_table'>
+		<tr>
+			<td style='width: 350px;border-bottom: 1px solid #aaa;'><h4>Plugin</h4></td>
+			<td style='border-bottom: 1px solid #aaa;'><h4>Activated on Site(s)</h4></td>
+		</tr>
+		<?php
+		// cycle through plugins
+		foreach ( $plugins as $a_plugin_slug => $a_plugin ) {
+			echo "
+			<tr>
+				<td valign=top>{$a_plugin['Name']}</td>
+				<td>";
+				$count = 0;
+				// if it's on entire network, highlight just that
+				if ( is_plugin_active_for_network( $a_plugin_slug ) ) {
+					echo "<span style='color:green;'>All</span> (Network Activated)";
+					$count = 99;
+				} 
+				// cycle through sites, see if sites have this plugin
+				else {
+					foreach ( $sites_plugins as $this_sites_blog_id => $this_sites_plugins ) {
+						if ( isset( $this_sites_plugins[$a_plugin_slug] ) ) {
+							echo $all_sites[ $this_sites_blog_id ] . '<br />';
+							$count++;
+						}
+					}
+				}
+				// not on any site
+				if ($count == 0)
+					echo "<span style='color:red'>None</span> (not Activated anywhere)";
+				echo "
+				</td>
+			</tr>";
+		}
+		?>                 
+	</table>  
+	<?php
+}
 
 function jr_rnap_nwpov() {
 	global $wpdb;

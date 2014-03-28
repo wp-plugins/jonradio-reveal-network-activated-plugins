@@ -39,7 +39,7 @@ add_action( 'admin_menu', 'jr_rnap_admin_hook' );
 function jr_rnap_admin_hook() {
 	//  Add Important Notice Page for this Plugin
 	global $jr_rnap_plugin_data;
-	add_plugins_page( $jr_rnap_plugin_data['Name'], 'Reveal Plugins', 'activate_plugins', 'jr_rnap_notice', 'jr_rnap_notices_page' );
+	add_plugins_page( $jr_rnap_plugin_data['Name'], 'Reveal Plugins', 'activate_plugins', 'jr_rnap_notice', 'jr_rnap_notice_page' );
 }
 
 /**

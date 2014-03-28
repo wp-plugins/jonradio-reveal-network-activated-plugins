@@ -3,7 +3,7 @@
 Plugin Name: jonradio Reveal Network Activated Plugins
 Plugin URI: http://jonradio.com/plugins/jonradio-reveal-network-activated-plugins/
 Description: Displays Network-Activated and Must-Use (MU) plugins, and Drop-ins on the Installed Plugins Admin panel for individual sites of a WordPress Network.
-Version: 3.0
+Version: 3.1
 Author: jonradio
 Author URI: http://jonradio.com/plugins
 License: GPLv2

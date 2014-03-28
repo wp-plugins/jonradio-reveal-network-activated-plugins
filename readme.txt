@@ -3,8 +3,8 @@ Contributors: jonradio
 Donate link: http://jonradio.com/plugins
 Tags: network, activation, activate, plugins, multisite, must-use, drop-ins
 Requires at least: 3.1
-Tested up to: 3.8
-Stable tag: 3.0
+Tested up to: 3.9
+Stable tag: 3.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -19,8 +19,6 @@ In a WordPress Network, i.e. - a single WordPress installation that provides mul
 A warning Notice is displayed if this plugin is activated on a WordPress installation that is not (yet) a WordPress Network.
 
 Every effort has been made to not interfere with plugins that create or modify their own entry on the **Installed Plugins** Admin panel.
-
-We are currently investigating reports of conflicts with other plugins that also control the display of plugins by Site Administrators, including Security plugins that always block this access and plugins that enhance function by always displaying plugins.
 
 = Settings =
 
@@ -65,6 +63,10 @@ To change this behaviour, select the "Enable administration menus - Plugins" che
 
 == Changelog ==
 
+= 3.1 =
+* Rewrote "What is Activated Where?" to correct for new Caching of Plugin data in WordPress Version 3.9
+* Fixed "Important Notice" link in non-Network WordPress installs
+
 = 3.0 =
 * Add "Show/Hide Plugins" section to Network Settings page for plugin, to allow specific plugins to be always hidden or always shown to non-Super Admin Site Administrators
 
@@ -89,6 +91,9 @@ To change this behaviour, select the "Enable administration menus - Plugins" che
 * Fix "You do not have sufficient permissions to manage plugins for this site." when trying to login
 
 == Upgrade Notice ==
+
+= 3.1 =
+Changes to Support WordPress Version 3.9
 
 = 3.0 =
 Add Settings for Always Hiding and Showing one or more Plugins
