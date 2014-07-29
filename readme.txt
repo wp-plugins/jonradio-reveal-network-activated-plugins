@@ -3,7 +3,7 @@ Contributors: jonradio
 Donate link: http://jonradio.com/plugins
 Tags: network, activation, activate, plugins, multisite, must-use, drop-ins
 Requires at least: 3.1
-Tested up to: 3.9
+Tested up to: 3.9.1
 Stable tag: 3.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -11,6 +11,8 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Displays Network-Activated and Must-Use (MU) plugins, and Drop-ins on the Installed Plugins Admin panel for individual sites of a WordPress Network.
 
 == Description ==
+
+WARNING:  This plugin does not yet work with the latest Beta version of WordPress Version 4.0.  We are working on this issue and hope to have a new version of this plugin available prior to the general release (i.e. - after Beta and Release Candidates are complete) of WordPress Version 4.0.
 
 Beyond what the name implies, the *jonradio Reveal Network Activated Plugins* plugin can display all Plugins that WordPress would normally hide:  WordPress only displays Network Activated and Must-Use plugins, as well as Drop-ins, on the **Installed Plugins** Network Admin panel; even there, they can be easily missed.  Under the control of any Super Administrator, *jonradio Reveal Network Activated Plugins* allows Network Activated and Must-Use plugins, and Drop-ins, to be displayed on each site's **Installed Plugins** Admin panel, with "Network Activated", "Must-Use Plugin" or "Drop-in" displayed below the plugin name where "Activate" or "Deactivate" is displayed for other plugins. In addition, the plugin's Network Admin panel, available only to Super Administrators, and the Delete Plugins panel, show which Plugins are activated on which Sites within the WordPress Network.
 
