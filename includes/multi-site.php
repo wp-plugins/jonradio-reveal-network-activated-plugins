@@ -30,14 +30,18 @@ if ( is_network_admin() ) {
 		* expand the Installed Plugins Admin panel to include
 		* Network-Activated plugins, Must-Use plugins and Drop-ins.
 		*
+		* Code adapted from /wp-admin/plugins.php and
+		* /wp-admin/includes/class-wp-plugins-list-table.php prepare_items().
+		*
 		* @return void
 		*/		
 		function jr_rnap_show_more_plugins() {
-			global $wp_list_table, $plugins, $totals;
+			global $wp_list_table, $status, $plugins, $totals, $page, $orderby, $order, $s;
 			
 			$wp_list_table = _get_list_table('WP_Plugins_List_Table');
 			/*	Re-do relevant parts of prepare_items()
 			*/
+			wp_reset_vars( array( 'orderby', 'order', 's' ) );
 			$plugins = array(
 				'all'                => array(),
 				'search'             => $plugins['search'],
@@ -145,6 +149,12 @@ if ( is_network_admin() ) {
 					}
 				}
 			}
+			
+			if ( $s ) {
+				$status = 'search';
+				$plugins['search'] = array_filter( $plugins['all'], array( $wp_list_table, '_search_callback' ) );
+			}				
+			
 			/*	Update Counts
 				Will need to add rest of prepare_items(), too
 			*/
@@ -162,7 +172,6 @@ if ( is_network_admin() ) {
 
 			/*	Update $status (not used until now)
 			*/
-			global $status;
 			if ( 'search' != $status ) {
 				if ( isset( $_REQUEST['plugin_status'] ) && in_array( $_REQUEST['plugin_status'], array( 'active', 'inactive', 'recently_activated', 'upgrade', 'mustuse', 'dropins' ) ) ) {
 					$status = $_REQUEST['plugin_status'];

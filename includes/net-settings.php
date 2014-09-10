@@ -191,6 +191,51 @@ function jr_rnap_network_settings_page() {
 
 	echo '</ul></p>';
 	?>
+	<hr />
+	<h3>
+	Need Help?
+	</h3>
+	<p>
+	Need help with this plugin?
+	Check the
+	information above,
+	and the
+	<a target="_blank" href="http://wordpress.org/plugins/jonradio-reveal-network-activated-plugins/">Description</a>, 
+	<a target="_blank" href="http://wordpress.org/plugins/jonradio-reveal-network-activated-plugins/faq/">FAQ</a>, 
+	<a target="_blank" href="http://wordpress.org/plugins/jonradio-reveal-network-activated-plugins/installation/">Installation</a>
+	and 
+	<a target="_blank" href="http://wordpress.org/support/plugin/jonradio-reveal-network-activated-plugins">Support</a>
+	tabs
+	in the <a target="_blank" href="http://wordpress.org/plugins/jonradio-reveal-network-activated-plugins/">WordPress Directory entry for this plugin</a>.
+	All of this information is based on the support questions that jonradio has answered both on-line and via e-mail since this plugin was first released in 2013.
+	</p>
+	<p>
+	Please be sure to check them all out if you have any unanswered questions.
+	If you cannot find the answers to all of your questions there,
+	simply post your question in the
+	<a target="_blank" href="http://wordpress.org/support/plugin/jonradio-reveal-network-activated-plugins">Support Forum</a>
+	or
+	<a target="_blank" href="http://jonradio.com/contact-us/">contact jonradio directly</a>
+	(be sure to mention which plugin your question pertains to).
+	</p>
+	<p>
+	For information on other jonradio plugins,
+	including Contact and Donation information,
+	<a target="_blank" href="http://jonradio.com/plugins/">click here</a>.
+	</p>
+	<h3>
+	Want to Help?
+	</h3>
+	<p>
+	As well as <a target="_blank" href="http://jonradio.com/plugins/">Donations</a>,
+	you can also help by 
+	<a target="_blank" href="http://wordpress.org/support/view/plugin-reviews/jonradio-reveal-network-activated-plugins">Reviewing this plugin</a> 
+	for the WordPress Plugin Directory,
+	and telling other people that it works for your particular combination of Plugin version and WordPress version
+	in the Compability section of the
+	<a target="_blank" href="http://wordpress.org/plugins/jonradio-reveal-network-activated-plugins/">WordPress Directory entry for this plugin</a>.
+	</p>
+	
 	<h3>Credits</h3>
 	<p>
 	"What is Activated Where?" is based on Version 1.0 of the Network Plugin Overview plugin by davidsword.

@@ -4,7 +4,7 @@ Donate link: http://jonradio.com/plugins
 Tags: network, activation, activate, plugins, multisite, must-use, drop-ins
 Requires at least: 3.1
 Tested up to: 4.0
-Stable tag: 3.1
+Stable tag: 3.1.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -63,6 +63,9 @@ To change this behaviour, select the "Enable administration menus - Plugins" che
 
 == Changelog ==
 
+= 3.1.1 =
+* Enabled Search functionality on individual Sites' Installed Plugins Admin panel
+
 = 3.1 =
 * Rewrote "What is Activated Where?" to correct for new Caching of Plugin data in WordPress Version 3.9
 * Fixed "Important Notice" link in non-Network WordPress installs
@@ -91,6 +94,9 @@ To change this behaviour, select the "Enable administration menus - Plugins" che
 * Fix "You do not have sufficient permissions to manage plugins for this site." when trying to login
 
 == Upgrade Notice ==
+
+= 3.1.1 =
+Enable Search functionality on individual Sites' Installed Plugins Admin panel
 
 = 3.1 =
 Changes to Support WordPress Version 3.9
