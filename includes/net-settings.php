@@ -354,6 +354,7 @@ function jr_rnap_validate_network_settings( $input ) {
 	/*	Only allow valid values for ['show'][plugin] elements;
 		delete entry when value is blank.
 	*/
+	$valid['show'] = array();
 	if ( isset( $input['show'] ) ) {
 		$settings = get_site_option( 'jr_rnap_network_settings' );
 		foreach ( $input['show'] as $plugin_file => $show ) {
