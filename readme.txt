@@ -1,7 +1,7 @@
 === jonradio Reveal Network Activated Plugins ===
 Contributors: jonradio
 Donate link: http://jonradio.com/plugins
-Tags: network, activation, activate, plugins, multisite, must-use, drop-ins
+Tags: adopt-me, network, activation, activate, plugins, multisite, must-use, drop-ins
 Requires at least: 3.1
 Tested up to: 4.2
 Stable tag: 3.1.2
