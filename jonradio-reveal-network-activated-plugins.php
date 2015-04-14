@@ -1,15 +1,15 @@
 <?php
 /*
 Plugin Name: jonradio Reveal Network Activated Plugins
-Plugin URI: http://jonradio.com/plugins/jonradio-reveal-network-activated-plugins/
+Plugin URI: http://zatzlabs.com/plugins/
 Description: Displays Network-Activated and Must-Use (MU) plugins, and Drop-ins on the Installed Plugins Admin panel for individual sites of a WordPress Network.
 Version: 3.1
-Author: jonradio
-Author URI: http://jonradio.com/plugins
+Author: David Gewirtz
+Author URI: http://zatzlabs.com/plugins/
 License: GPLv2
 */
 
-/*  Copyright 2013  jonradio  (email : info@jonradio.com)
+/*  Copyright 2013  jonradio  (email : info@zatz.com)
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
