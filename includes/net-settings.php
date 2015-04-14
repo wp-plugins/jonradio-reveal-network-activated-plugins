@@ -157,7 +157,7 @@ function jr_rnap_network_settings_page() {
 	<p>
 	If you would like to see this Settings page on each individual Site's Admin Panels within the WordPress Network ("Multi-site")
 	and/or be able to control these Settings separately for each Site,
-	<a href="http://jonradio.com/contact-us/">please contact the Plugin author</a>
+	<a href="http://zatzlabs.com/contact-us/">please contact the Plugin author</a>
 	and this will be added to a future version of this plugin if there is enough interest expressed by webmasters such as you.
 	</p>
 	<?php
