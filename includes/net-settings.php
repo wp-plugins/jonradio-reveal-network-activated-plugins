@@ -157,7 +157,7 @@ function jr_rnap_network_settings_page() {
 	<p>
 	If you would like to see this Settings page on each individual Site's Admin Panels within the WordPress Network ("Multi-site")
 	and/or be able to control these Settings separately for each Site,
-	<a href="http://jonradio.com/contact-us/">please contact the Plugin author</a>
+	<a href="http://zatzlabs.com/contact-us/">please contact the Plugin author</a>
 	and this will be added to a future version of this plugin if there is enough interest expressed by webmasters such as you.
 	</p>
 	<?php
@@ -215,19 +215,19 @@ function jr_rnap_network_settings_page() {
 	simply post your question in the
 	<a target="_blank" href="http://wordpress.org/support/plugin/jonradio-reveal-network-activated-plugins">Support Forum</a>
 	or
-	<a target="_blank" href="http://jonradio.com/contact-us/">contact jonradio directly</a>
+	<a target="_blank" href="http://zatzlabs.com/contact-us/">contact jonradio directly</a>
 	(be sure to mention which plugin your question pertains to).
 	</p>
 	<p>
 	For information on other jonradio plugins,
 	including Contact and Donation information,
-	<a target="_blank" href="http://jonradio.com/plugins/">click here</a>.
+	<a target="_blank" href="http://zatzlabs.com/plugins/">click here</a>.
 	</p>
 	<h3>
 	Want to Help?
 	</h3>
 	<p>
-	As well as <a target="_blank" href="http://jonradio.com/plugins/">Donations</a>,
+	As well as <a target="_blank" href="http://zatzlabs.com/plugins/">Donations</a>,
 	you can also help by 
 	<a target="_blank" href="http://wordpress.org/support/view/plugin-reviews/jonradio-reveal-network-activated-plugins">Reviewing this plugin</a> 
 	for the WordPress Plugin Directory,
