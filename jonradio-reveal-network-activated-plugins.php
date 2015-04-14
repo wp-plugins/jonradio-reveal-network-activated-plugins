@@ -4,7 +4,7 @@ Plugin Name: jonradio Reveal Network Activated Plugins
 Plugin URI: http://zatzlabs.com/lab-notes/
 Description: Displays Network-Activated and Must-Use (MU) plugins, and Drop-ins on the Installed Plugins Admin panel for individual sites of a WordPress Network.
 Version: 3.1.2
-Author: dgewirtz
+Author: David Gewirtz
 Author URI: http://zatzlabs.com/lab-notes/
 License: GPLv2
 */
