@@ -1,5 +1,5 @@
 === jonradio Reveal Network Activated Plugins ===
-Contributors: jonradio
+Contributors: dgewirtz
 Donate link: http://zatzlabs.com/plugins/
 Tags: network, activation, activate, plugins, multisite, must-use, drop-ins
 Requires at least: 3.1
