@@ -1,6 +1,6 @@
 === jonradio Reveal Network Activated Plugins ===
 Contributors: dgewirtz
-Donate link: http://zatzlabs.com/plugins/
+Donate link: http://zatzlabs.com/lab-notes/
 Tags: network, activation, activate, plugins, multisite, must-use, drop-ins
 Requires at least: 3.1
 Tested up to: 4.2
@@ -12,7 +12,7 @@ Displays Network-Activated and Must-Use (MU) plugins, and Drop-ins on the Instal
 
 == Description ==
 
-Beyond what the name implies, the *jonradio Reveal Network Activated Plugins* plugin can display all Plugins that WordPress would normally hide:  WordPress only displays Network Activated and Must-Use plugins, as well as Drop-ins, on the **Installed Plugins** Network Admin panel; even there, they can be easily missed.  Under the control of any Super Administrator, *jonradio Reveal Network Activated Plugins* allows Network Activated and Must-Use plugins, and Drop-ins, to be displayed on each site's **Installed Plugins** Admin panel, with "Network Activated", "Must-Use Plugin" or "Drop-in" displayed below the plugin name where "Activate" or "Deactivate" is displayed for other plugins. In addition, the plugin's Network Admin panel, available only to Super Administrators, and the Delete Plugins panel, show which Plugins are activated on which Sites within the WordPress Network.
+Beyond what the name implies, the *Reveal Network Activated Plugins* plugin can display all Plugins that WordPress would normally hide:  WordPress only displays Network Activated and Must-Use plugins, as well as Drop-ins, on the **Installed Plugins** Network Admin panel; even there, they can be easily missed.  Under the control of any Super Administrator, *Reveal Network Activated Plugins* allows Network Activated and Must-Use plugins, and Drop-ins, to be displayed on each site's **Installed Plugins** Admin panel, with "Network Activated", "Must-Use Plugin" or "Drop-in" displayed below the plugin name where "Activate" or "Deactivate" is displayed for other plugins. In addition, the plugin's Network Admin panel, available only to Super Administrators, and the Delete Plugins panel, show which Plugins are activated on which Sites within the WordPress Network.
 
 In a WordPress Network, i.e. - a single WordPress installation that provides multiple sites ("Multi-site"), Plugins can be activated on one or more individual sites or they can be **Network Activated**, which means they are activated on all sites.  In addition, Must-Use plugins are automatially activated if present and Drop-ins are activated Network-wide by a Constant set in wp-config.php. Confusion can result because WordPress does not display any of these plugins on each site's **Installed Plugins** Admin panel, a confusion that this plugin hopes to eliminate.
 
