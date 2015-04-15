@@ -1,4 +1,4 @@
-=== jonradio Reveal Network Activated Plugins ===
+=== Reveal Network Activated Plugins ===
 Contributors: dgewirtz
 Donate link: http://zatzlabs.com/lab-notes/
 Tags: network, activation, activate, plugins, multisite, must-use, drop-ins
@@ -39,6 +39,11 @@ A "Show/Hide Plugins" table of choices can be used to always Display or Hide spe
 **Site Administrator** - has no access to Network settings and setup, but does have access to Admin panels for any Site for which he has the Role of Administrator.
 
 **"activate_plugins" Capability** - one of many settings for a User for a specific Site, i.e. - each User either has or does not have the "activate_plugins" Capability for a given Site.  Anyone with the Role of Administrator for a Site automatically has the "activate_plugins" Capability and it cannot be removed.  However, it can be disabled through the "Enable administration menus - Plugins" Network setting described above.
+
+> <strong>Adoption Notice</strong><br>
+> This plugin was recently adopted by David Gewirtz and ongoing support and updates will continue. Feel free to visit [David's Lab Notes](http://zatzlabs.com/lab-notes/) for additional details and to sign up for emailed news updates.
+
+Special thanks to Jon 'jonradio' Pearkins for creating the plugin and making adoption possible.
 
 == Installation ==
 
