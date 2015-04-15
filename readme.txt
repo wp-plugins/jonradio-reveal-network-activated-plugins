@@ -1,4 +1,4 @@
-=== jonradio Reveal Network Activated Plugins ===
+=== Reveal Network Activated Plugins ===
 Contributors: dgewirtz
 Donate link: http://zatzlabs.com/lab-notes/
 Tags: network, activation, activate, plugins, multisite, must-use, drop-ins
@@ -11,6 +11,8 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Displays Network-Activated and Must-Use (MU) plugins, and Drop-ins on the Installed Plugins Admin panel for individual sites of a WordPress Network.
 
 == Description ==
+
+*Formerly: "jonradio Reveal Network Activated Plugins"*
 
 Beyond what the name implies, the *Reveal Network Activated Plugins* plugin can display all Plugins that WordPress would normally hide:  WordPress only displays Network Activated and Must-Use plugins, as well as Drop-ins, on the **Installed Plugins** Network Admin panel; even there, they can be easily missed.  Under the control of any Super Administrator, *Reveal Network Activated Plugins* allows Network Activated and Must-Use plugins, and Drop-ins, to be displayed on each site's **Installed Plugins** Admin panel, with "Network Activated", "Must-Use Plugin" or "Drop-in" displayed below the plugin name where "Activate" or "Deactivate" is displayed for other plugins. In addition, the plugin's Network Admin panel, available only to Super Administrators, and the Delete Plugins panel, show which Plugins are activated on which Sites within the WordPress Network.
 
@@ -39,6 +41,11 @@ A "Show/Hide Plugins" table of choices can be used to always Display or Hide spe
 **Site Administrator** - has no access to Network settings and setup, but does have access to Admin panels for any Site for which he has the Role of Administrator.
 
 **"activate_plugins" Capability** - one of many settings for a User for a specific Site, i.e. - each User either has or does not have the "activate_plugins" Capability for a given Site.  Anyone with the Role of Administrator for a Site automatically has the "activate_plugins" Capability and it cannot be removed.  However, it can be disabled through the "Enable administration menus - Plugins" Network setting described above.
+
+> <strong>Adoption Notice</strong><br>
+> This plugin was recently adopted by David Gewirtz and ongoing support and updates will continue. Feel free to visit [David's Lab Notes](http://zatzlabs.com/lab-notes/) for additional details and to sign up for emailed news updates.
+
+Special thanks to Jon 'jonradio' Pearkins for creating the plugin and making adoption possible.
 
 == Installation ==
 
